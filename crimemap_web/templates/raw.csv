@@ -1,0 +1,3 @@
+Lat,Long,Address,Description
+{% for crime in crimes %}{{crime.geocode[0]}},{{crime.geocode[1]}},{{crime.location}},{{crime.description}}
+{% endfor %}
