@@ -3,7 +3,9 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-import ZODB, ZODB.FileStorage
+from ZODB import DB
+from ZEO import ClientStorage
+import ZODB.config
 from BTrees.OOBTree import OOBTree
 from datetime import datetime
 import transaction
@@ -16,7 +18,8 @@ class CrimemapPipeline(object):
         pass
 
     def open_spider(self, spider):
-        self.connection = ZODB.connection('crimemap.fs')
+        self.storage = ZODB.config.databaseFromURL('zeoclient.config')
+        self.connection = self.storage.open()
         self.dbroot = self.connection.root()
         if not self.dbroot.has_key('crimes'):
             self.dbroot['crimes'] = OOBTree()
