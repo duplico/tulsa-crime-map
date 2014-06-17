@@ -27,7 +27,9 @@ def main():
     fire_calls = json.load(fire_calls)['Incidents']['Incident']
     for call in fire_calls:
         k = (call['Address'], call['Problem'])
+        print "Got a call:", k
         if k in fire_db:
+            print "Already exists."
             continue
         v = dict(
             location=call['Address'], 
@@ -35,7 +37,9 @@ def main():
             geocode=geo.geocode('%s, Tulsa, OK' % call['Address']).coordinates,
             timestamp=datetime.now() # TODO, use call['ResponseDate']
         )
+        print v
         fire_db[k] = v
+        keys.add(k)
 
     # Delete stale entries:
     # TODO: Use ResponseDate
