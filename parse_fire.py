@@ -2,13 +2,35 @@ from ZODB import DB
 from ZEO import ClientStorage
 import ZODB.config
 from BTrees.OOBTree import OOBTree
-from datetime import datetime
+from datetime import datetime, timedelta
 import transaction
 
 import json, urllib2
 
 from pygeocoder import Geocoder
 from api_key import api_key
+
+def normalize_timestamp(timestamp):
+    final_date_pieces = []
+    pieces = timestamp.split(' ')
+    date_pieces = pieces[0].split('/')
+    for piece in date_pieces:
+        if len(piece) < 2:
+            final_date_pieces.append('0%s' % piece)
+        else:
+            final_date_pieces.append(piece)
+
+    time_pieces = pieces[1].split(':')
+    for piece in time_pieces:
+        if len(piece) < 2:
+            final_date_pieces.append('0%s' % piece)
+        else:
+            final_date_pieces.append(piece)
+
+    final_date_pieces.append(pieces[2]) # AM/PM
+
+    final_date = "%s/%s/%s %s:%s:%s %s" % tuple(final_date_pieces)
+    return final_date
 
 def main():
     # Set up DB connection:
@@ -25,7 +47,7 @@ def main():
     # Load up our OpenTulsa data
     fire_calls = urllib2.urlopen("https://www.cityoftulsa.org/cot/opendata/tfd_dispatch.jsn")
     fire_calls = json.load(fire_calls)['Incidents']['Incident']
-    time_format = "%-m/%-d/%Y %-I:%M:%S %p" # TODO: LAME!!! This doesn't work on Windows, supposedly.
+    time_format = "%m/%d/%Y %I:%M:%S %p"
     for call in fire_calls:
         k = (call['Address'], call['Problem'])
         print "Got a call:", k
@@ -36,9 +58,9 @@ def main():
             location=call['Address'], 
             description=call['Problem'], 
             geocode=geo.geocode('%s, Tulsa, OK' % call['Address']).coordinates,
-            timestamp=datetime.strptime(call['ResponseDate'], time_format)
+            timestamp=datetime.strptime(normalize_timestamp(call['ResponseDate']), time_format)
         )
-        if v['timestamp'] + datetime.timedelta(hours=1) < datetime.now():
+        if v['timestamp'] + timedelta(hours=1) < datetime.now():
             continue # We only care about calls from the last hour, I think.
         print v
         fire_db[k] = v
