@@ -6,13 +6,25 @@ This web app and Scrapy pipeline/script scrapes the [Tulsa Police Department Rec
 
 There are some non-Python dependencies. Specifically, in Ubuntu this will take care of those:
 
-    $ apt-get install build-essential openssl python-dev libffi-dev libxml libxslt1-dev
+    $ apt-get install build-essential openssl python-dev libffi-dev libxml2 libxslt1-dev
 
 Python dependencies are located in the requirement.txt file. To install them, use pip:
 
     $ pip install --requirement requirement.txt
 
 You will also need a Google Maps API key, which you should put in api_key.py. A skeleton for this file is provided in api_key.py.example.
+
+### Running ###
+
+Start out by doing an initial scrape of the TPD site:
+
+    $ scrapy crawl crimemap
+
+That's the command (or its equivalent through scrapyd) that needs to run regularly to update the app's crime data.
+
+Then start up the Flask development server on port 5000 with:
+
+    $ python run_web.py
 
 ### License ###
 
