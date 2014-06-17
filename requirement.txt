@@ -24,7 +24,7 @@ pyasn1-modules==0.0.5
 pycparser==2.10
 pygeocoder==1.2.5
 pyreadline==2.0
-pywin32==219
+#pywin32==219
 queuelib==1.1.1
 requests==2.3.0
 service-identity==0.2
