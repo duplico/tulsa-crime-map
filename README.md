@@ -1,6 +1,4 @@
-# README #
-
-### Tulsa Crime Tracker ###
+## Tulsa Crime Tracker ##
 
 This web app and Scrapy pipeline/script scrapes the [Tulsa Police Department Recent Calls Near You](https://www.tulsapolice.org/live-calls-/police-calls-near-you.aspx) page and generates a map and CSV of the results. The stack is Python, Scrapy, Flask, and Leaflet for mapping.
 
