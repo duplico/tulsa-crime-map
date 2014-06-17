@@ -23,6 +23,7 @@ class CrimemapPipeline(object):
         self.dbroot = self.connection.root()
         if not self.dbroot.has_key('crimes'):
             self.dbroot['crimes'] = OOBTree()
+        self.dbroot['updated'] = datetime.now()
         self.crime_db = self.dbroot['crimes']
         self.geo = Geocoder(api_key=api_key)
         self.keys = set()

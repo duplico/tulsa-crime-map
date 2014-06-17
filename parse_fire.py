@@ -50,6 +50,7 @@ def main():
     time_format = "%m/%d/%Y %I:%M:%S %p"
     for call in fire_calls:
         k = (call['Address'], call['Problem'])
+        keys.add(k)
         if k in fire_db:
             print "Already exists."
             continue
@@ -64,7 +65,6 @@ def main():
         )
         print "Got a call:", k
         fire_db[k] = v
-        keys.add(k)
 
     # Delete stale entries:
     # TODO: Use ResponseDate

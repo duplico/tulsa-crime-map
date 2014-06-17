@@ -18,9 +18,13 @@
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'examples.map-i86knfo3'
 		}).addTo(map);
+        var marker;
 
         {% for crime in crimes %}
-            L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}], {opacity: 0.75}).addTo(map).bindLabel("{{crime.description}}", { noHide: true }).showLabel();
+           marker = L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}], {opacity: 0.75});
+           marker.bindPopup("<b>{{crime.timestamp.ctime()}}</b>: <i>{{crime.location}}</i>");
+           marker.bindLabel("{{crime.description}}", { noHide: true }).showLabel().addTo(map);
+           marker.addTo(map);
         {% endfor %}
 
         {% for fire in fires %}
@@ -29,6 +33,7 @@
 
 		
 	</script>
+<p>Last updated {{updated}}</p>
 <p>
 This data is scraped from the Tulsa Police Department's <a href="https://www.tulsapolice.org/live-calls-/police-calls-near-you.aspx">Recent Calls Near You</a> feature.
 </p>
