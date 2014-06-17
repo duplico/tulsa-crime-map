@@ -1,12 +1,12 @@
 <html>
 <head>
 <title>Tulsa Crime Map</title>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="/static//leaflet.css" />
 <link rel="stylesheet" href="/static/leaflet.label.css" />
 </head>
 <body>
 <div id="map" style="width: 600px; height: 400px"></div>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="/static/leaflet.js"></script>
 <script src="/static/leaflet.label.js"></script>
 <script>
 		var map = L.map('map').setView([36.14,-95.96], 13);
@@ -24,7 +24,7 @@
         {% endfor %}
 
         {% for fire in fires %}
-            L.marker([{{fire.geocode[0]}}, {{fire.geocode[1]}}]).addTo(map).bindLabel("{{fire.description}}", { noHide: true }).showLabel();
+            L.marker([{{fire.geocode[0]}}, {{fire.geocode[1]}}], {icon: L.Icon.Default()}).addTo(map).bindLabel("{{fire.description}}", { noHide: true }).showLabel();
         {% endfor %}
 
 		
