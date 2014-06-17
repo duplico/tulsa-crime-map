@@ -50,19 +50,19 @@ def main():
     time_format = "%m/%d/%Y %I:%M:%S %p"
     for call in fire_calls:
         k = (call['Address'], call['Problem'])
-        print "Got a call:", k
         if k in fire_db:
             print "Already exists."
             continue
+        timing = datetime.strptime(normalize_timestamp(call['ResponseDate']), time_format)
+        if timing + timedelta(hours=1) < datetime.now():
+            continue # We only care about calls from the last hour, I think.
         v = dict(
             location=call['Address'], 
             description=call['Problem'], 
             geocode=geo.geocode('%s, Tulsa, OK' % call['Address']).coordinates,
-            timestamp=datetime.strptime(normalize_timestamp(call['ResponseDate']), time_format)
+            timestamp=timing
         )
-        if v['timestamp'] + timedelta(hours=1) < datetime.now():
-            continue # We only care about calls from the last hour, I think.
-        print v
+        print "Got a call:", k
         fire_db[k] = v
         keys.add(k)
 
