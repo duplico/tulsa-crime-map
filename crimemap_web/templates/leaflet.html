@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Tulsa Crime Map</title>
-<link rel="stylesheet" href="/static//leaflet.css" />
+<link rel="stylesheet" href="/static/leaflet.css" />
 <link rel="stylesheet" href="/static/leaflet.label.css" />
 </head>
 <body>
@@ -24,7 +24,7 @@
         {% endfor %}
 
         {% for fire in fires %}
-            L.marker([{{fire.geocode[0]}}, {{fire.geocode[1]}}], {icon: L.Icon.Default()}).addTo(map).bindLabel("{{fire.description}}", { noHide: true }).showLabel();
+            L.marker([{{fire.geocode[0]}}, {{fire.geocode[1]}}], {icon: new L.Icon.Default({iconUrl: '/static/images/red-marker-icon.png', iconRetinaUrl: '/static/images/red-marker-icon-2x.png'})}).addTo(map).bindLabel("{{fire.description}}", { noHide: true }).showLabel();
         {% endfor %}
 
 		
