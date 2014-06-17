@@ -20,11 +20,11 @@
 		}).addTo(map);
 
         {% for crime in crimes %}
-            L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}]).addTo(map).bindLabel("{{crime.description}}", { noHide: true }).showLabel();
+            L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}], {opacity: 0.75}).addTo(map).bindLabel("{{crime.description}}", { noHide: true }).showLabel();
         {% endfor %}
 
         {% for fire in fires %}
-            L.marker([{{fire.geocode[0]}}, {{fire.geocode[1]}}], {icon: new L.Icon.Default({iconUrl: '/static/images/red-marker-icon.png', iconRetinaUrl: '/static/images/red-marker-icon-2x.png'})}).addTo(map).bindLabel("{{fire.description}}", { noHide: true }).showLabel();
+            L.marker([{{fire.geocode[0]}}, {{fire.geocode[1]}}], {opacity: 0.6, icon: new L.Icon.Default({iconUrl: '/static/images/red-marker-icon.png', iconRetinaUrl: '/static/images/red-marker-icon-2x.png'})}).addTo(map).bindLabel("{{fire.description}}", { noHide: true, direction: 'left' }).showLabel();
         {% endfor %}
 
 		
