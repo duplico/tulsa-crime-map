@@ -3,7 +3,7 @@ from crimemap_web import app, db
 
 @app.route('/')
 def index():
-    return render_template('leaflet.html', crimes=db['crimes'].values(), fires=db['fires'].values())
+    return render_template('leaflet.html', crimes=db['crimes'].values(), fires=db['fires'].values(), updated=db['updated'].ctime())
 
 @app.route('/raw.csv')
 def csv():
