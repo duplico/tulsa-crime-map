@@ -25,6 +25,7 @@ def main():
     # Load up our OpenTulsa data
     fire_calls = urllib2.urlopen("https://www.cityoftulsa.org/cot/opendata/tfd_dispatch.jsn")
     fire_calls = json.load(fire_calls)['Incidents']['Incident']
+    time_format = "%-m/%-d/%Y %-I:%M:%S %p" # TODO: LAME!!! This doesn't work on Windows, supposedly.
     for call in fire_calls:
         k = (call['Address'], call['Problem'])
         print "Got a call:", k
@@ -35,8 +36,10 @@ def main():
             location=call['Address'], 
             description=call['Problem'], 
             geocode=geo.geocode('%s, Tulsa, OK' % call['Address']).coordinates,
-            timestamp=datetime.now() # TODO, use call['ResponseDate']
+            timestamp=datetime.strptime(call['ResponseDate'], time_format)
         )
+        if v['timestamp'] + datetime.timedelta(hours=1) < datetime.now():
+            continue # We only care about calls from the last hour, I think.
         print v
         fire_db[k] = v
         keys.add(k)
