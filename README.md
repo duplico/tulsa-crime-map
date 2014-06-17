@@ -12,6 +12,8 @@ Python dependencies are located in the requirement.txt file. To install them, us
 
     $ pip install --requirement requirement.txt
 
+You will also need a Google Maps API key, which you should put in api_key.py. A skeleton for this file is provided in api_key.py.example.
+
 ### License ###
 
 [Leaflet.label](https://github.com/Leaflet/Leaflet.label), included here, is Copyright (c) 2012 Jacob Toye, released under the MIT License.
