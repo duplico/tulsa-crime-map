@@ -22,6 +22,10 @@ Start out by doing an initial scrape of the TPD site:
 
 That's the command (or its equivalent through scrapyd) that needs to run regularly to update the app's crime data.
 
+For fire data, it's this command:
+
+    $ python parse_fire.py
+
 Then start up the Flask development server on port 5000 with:
 
     $ python run_web.py
