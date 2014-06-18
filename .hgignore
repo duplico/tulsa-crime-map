@@ -2,3 +2,6 @@ syntax: glob
 *.pyc
 *.fs
 crimemap.fs.*
+
+# Don't track API keys
+api_key.py
