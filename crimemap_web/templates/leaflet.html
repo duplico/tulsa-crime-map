@@ -1,8 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Tulsa Crime Map</title>
-<link rel="stylesheet" href="/static/leaflet.css" />
-<link rel="stylesheet" href="/static/leaflet.label.css" />
+  <meta charset="UTF-8">
+  <title>Tulsa Crime Map</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
 <div id="map" style="width: 600px; height: 400px"></div>
@@ -22,7 +24,7 @@
 
         {% for crime in crimes %}
            marker = L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}], {opacity: 0.75});
-           marker.bindPopup("<b>{{crime.timestamp.ctime()}}</b>: <i>{{crime.location}}</i>");
+           marker.bindPopup("{{crime.timestamp.ctime()}}: {{crime.location}}");
            marker.bindLabel("{{crime.description}}", { noHide: true }).showLabel().addTo(map);
            marker.addTo(map);
         {% endfor %}
@@ -33,18 +35,5 @@
 
 		
 	</script>
-<p>Last updated {{updated}}</p>
-<p>
-This data is scraped from the Tulsa Police Department's <a href="https://www.tulsapolice.org/live-calls-/police-calls-near-you.aspx">Recent Calls Near You</a> feature.
-</p>
-<p>
-Many other data sources are available for free from <a href="http://www.cityoftulsa.org/opentulsa">Open Tulsa</a>, the City of Tulsa's open data initiative.
-</p>
-<p>
-Get this data as <a href="/raw.csv">comma-separated value file</a>
-</p>
-<p>
-This code is on Bitbucket <a href="https://bitbucket.org/duplico/tulsa-crime-map">here</a>.
-</p>
 </body>
 </html>
