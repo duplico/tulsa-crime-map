@@ -18,12 +18,25 @@
 body {
   background-color: $grey-light;
   color: $grey-dark;
+  margin: 1em 0 2em 0;
 }
 
-header {
-  @extend %container;
 
+.container {
+  margin: 0 auto;
+  max-width: $max-width;
+
+  background: lighten($grey-light, 2.5%);
+  border: 1px solid darken($grey-mid, 5%);
+  @include box-shadow(0 0 6px rgba($black, 0.25));
+  @include border-radius(3px);
+}
+
+
+header {
   padding: 1em;
+  background: lighten($grey-light, 5%);
+  @include border-radius(3px 3px 0 0);
 
   h1 {
     margin: 0;
@@ -31,7 +44,6 @@ header {
 }
 
 main {
-  @extend %container;
 }
 
 #map {
@@ -45,9 +57,6 @@ main {
 }
 
 footer {
-  @extend %container;
-  @extend %clearfix;
-
   padding: 1em;
 
   ul {
@@ -61,8 +70,8 @@ footer {
 
     @include respond-to('footer three col') {
       display: flex;
-      border-left: 1px solid darken($grey-light, 5%);
-      border-right: 1px solid lighten($grey-light, 5%);
+      border-left: 1px solid darken($grey-light, 2.5%);
+      border-right: 1px solid lighten($grey-light, 7.5%);
 
       li {
         flex: 1 1;
@@ -71,8 +80,8 @@ footer {
         margin-bottom: 0;
         text-align: center;
 
-        border-left: 1px solid lighten($grey-light, 5%);
-        border-right: 1px solid darken($grey-light, 5%);
+        border-left: 1px solid lighten($grey-light, 7.5%);
+        border-right: 1px solid darken($grey-light, 2.5%);
       }
     }
 

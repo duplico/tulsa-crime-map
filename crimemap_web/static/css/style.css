@@ -1,16 +1,7 @@
-.clearfix:after,
-footer:after {
+.clearfix:after {
   content: "";
   display: table;
   clear: both;
-}
-
-.container,
-header,
-main,
-footer {
-  margin: 0 auto;
-  max-width: 1280px;
 }
 
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
@@ -1089,10 +1080,23 @@ code, kbd, pre, samp {
 body {
   background-color: #eaeaea;
   color: #444444;
+  margin: 1em 0 2em 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  background: #f0f0f0;
+  border: 1px solid #aeaeae;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
 }
 
 header {
   padding: 1em;
+  background: #f7f7f7;
+  border-radius: 3px 3px 0 0;
 }
 header h1 {
   margin: 0;
@@ -1137,8 +1141,8 @@ footer ul li {
 @media (min-width: 680px) {
   footer ul {
     display: flex;
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #f7f7f7;
+    border-left: 1px solid #e4e4e4;
+    border-right: 1px solid #fdfdfd;
   }
   footer ul li {
     flex: 1 1;
@@ -1146,7 +1150,7 @@ footer ul li {
     padding-right: 1em;
     margin-bottom: 0;
     text-align: center;
-    border-left: 1px solid #f7f7f7;
-    border-right: 1px solid #dddddd;
+    border-left: 1px solid #fdfdfd;
+    border-right: 1px solid #e4e4e4;
   }
 }
