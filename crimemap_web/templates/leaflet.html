@@ -1,38 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Tulsa Crime Map</title>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-<link rel="stylesheet" href="/static/leaflet.label.css" />
+  <meta charset="UTF-8">
+  <title>Tulsa Crime Map</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <link rel="stylesheet" href="/static/leaflet.label.css" />
 </head>
 <body>
-<div id="map" style="width: 600px; height: 400px"></div>
-<p>
-This data is scraped from the Tulsa Police Department's <a href="https://www.tulsapolice.org/live-calls-/police-calls-near-you.aspx">Recent Calls Near You</a> feature.
-</p>
-<p>
-Many other data sources are available for free from <a href="http://www.cityoftulsa.org/opentulsa">Open Tulsa</a>, the City of Tulsa's open data initiative.
-</p>
-<p>
-Get this data as <a href="/raw.csv">comma-separated value file</a>
-</p>
-<p>
-This code is on Bitbucket <a href="https://bitbucket.org/duplico/tulsa-crime-map">here</a>.
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script src="/static/leaflet.label.js"></script>
-<script>
-	var map = L.map('map').setView([36.14,-95.96], 13);
+  <header>
+    <h1>Tulsa Crime Map</h1>
+  </header>
+  <main>
+    <div id="map"></div>
+  </main>
+  <footer>
+    <ul>
+      <li>This data is scraped from the Tulsa Police Department's <a href="https://www.tulsapolice.org/live-calls-/police-calls-near-you.aspx">Recent Calls Near You</a> feature.</li>
+      <li>Many other data sources are available for free from <a href="http://www.cityoftulsa.org/opentulsa">Open Tulsa</a>, the City of Tulsa's open data initiative.</li>
+      <li>Get this data as <a href="/raw.csv">comma-separated value file</a>. This code is on Bitbucket <a href="https://bitbucket.org/duplico/tulsa-crime-map">here</a>.</li>
+    </ul>
+  </footer>
 
-	L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		id: 'examples.map-i86knfo3'
-	}).addTo(map);
-	
-      {% for crime in crimes %}
-          L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}]).addTo(map).bindLabel("{{crime.description}}", { noHide: true }).showLabel();
-      {% endfor %}
-</script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script src="/static/leaflet.label.js"></script>
+  <script>
+  	var map = L.map('map').setView([36.14,-95.96], 13);
+
+  	L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+  		maxZoom: 18,
+  		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+  			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+  			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+  		id: 'examples.map-i86knfo3'
+  	}).addTo(map);
+
+    {% for crime in crimes %}
+        L.marker([{{crime.geocode[0]}}, {{crime.geocode[1]}}]).addTo(map).bindLabel("{{crime.description}}", { noHide: true }).showLabel();
+    {% endfor %}
+  </script>
 </body>
 </html>
