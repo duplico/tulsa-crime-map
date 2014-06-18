@@ -9,9 +9,3 @@
 %clearfix {
 	@include clearfix;
 }
-
-.container,
-%container {
-  margin: 0 auto;
-  max-width: $max-width;
-}
