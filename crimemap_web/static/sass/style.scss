@@ -12,6 +12,9 @@
 @import 'global/_normalize.css.scss';
 @import 'global/type';
 
+@import 'leaflet';
+@import 'leaflet.label';
+
 body {
   background-color: $grey-light;
   color: $grey-dark;
