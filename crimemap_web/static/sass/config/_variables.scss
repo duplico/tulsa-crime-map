@@ -1,0 +1,138 @@
+// Variables Partials
+//
+// All of your variables should go in this file.
+
+$max-width:   1280px;
+
+
+// Font faces, stacks and sizes.
+
+$base-font-size:   16px;
+$base-line-height: 1.5;
+
+// The following font family declarations are based on the Microsoft core web
+// fonts which are common fonts available on most computer systems. The DejaVu
+// and Nimbus Sans fonts are commonly available on Linux systems where the MS
+// fonts are less common. Tahoma and Helvetica are also widely available.
+//
+// A user's web browser will look at the comma-separated list and will
+// attempt to use each font in turn until it finds one that is available
+// on the user's computer. The final "generic" font (sans-serif, serif or
+// monospace) hints at what type of font to use if the web browser doesn't
+// find any of the fonts in the list.
+
+// First, let's create some font stacks.
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
+
+$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+// For an explanation of why "sans-serif" is at the end of this list, see
+// http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+
+$opensans:        'Open Sans', $helvetica;
+
+// Now create some variables for the font stacks we want to use on this site.
+$base-font-family: $helvetica; // The font family set on the html element.
+$font-body:        $opensans;
+$font-monospace:   $courier;
+$form-font-family: $helvetica;
+
+$font-body-weight: 300; // Verlag is pulled down in 300 and 600 weights.
+
+//
+// Colors, etc.
+//
+
+
+$white          : #FFFFFF;
+$black          : #000000;
+$blue           : #3399BB;
+$orange         : #FF9900;
+$grey-light     : #eaeaea;
+$grey-mid       : #bbbbbb;
+$grey-dark      : #444444;
+
+
+// Standard colors: for standard 4K and other brand colors.
+// Note: these are just for reference, and some brands have multiple colors.
+$social-colors:(
+  facebook    : #3B5998,
+  twitter     : #33CCFF,
+  youtube     : #FF3333,
+  pinterest   : #990000,
+  skype       : #12A5F4,
+  flickr      : #FE0883,
+  foursquare  : #8FD400,
+  instagram   : #4E433C,
+  linkedin    : #4875B4,
+  tumblr      : #2B4964,
+  vimeo       : #86B32D,
+  google      : #D6492C,
+  fk          : #66B360,
+);
+
+
+// Base color variables.
+$link           : $blue;
+$visited        : $blue;
+$selection-bg   : $grey-dark;
+$selection      : $white;
+
+// The amount lists, blockquotes and comments are indented.
+$indent-amount: 2em;
+
+
+// Add Singularity responsive layout settings.
+//
+// Singularity allows the creation of responsive grids within your site's layout
+// Go to the singularity github wiki for full implementation, and how to
+// integrate it with breakpoint as well.
+//
+// @see https://github.com/Team-Sass/Singularity/wiki
+
+@include sgs-change('mobile first',       true);
+@include sgs-change('include border box', false);
+@include sgs-change('include clearfix',   false);
+@include sgs-change('direction',          'both');
+
+@include add-grid(12);
+
+// Define our gutters.
+@include add-gutter(1/3);
+
+
+// Add breakpoint settings.
+//
+// Breakpoint allows us to embed media queries directly into each rule that
+// needs it, rather than forcing a developer to place rules for a single
+// component in multiple places depending on the media query they want to
+// affect.
+//
+// @see https://github.com/Team-Sass/breakpoint/wiki
+//
+// Listed here are named breakpoints. They can vary in complexity, allowing you to
+// get rid of the cognitive load behind typing and remembering media queries.
+//
+// @see https://github.com/Team-Sass/breakpoint/wiki/Respond-To
+
+// $sample-breakpoints: "small-ish" (300px),
+//                      "medium-ish" (460px),
+//                      "large-ish" (770px),
+//                      "extra-large-ish" (1000px);
+
+$breakpoint-no-queries:         false !default;
+$breakpoint-no-query-fallbacks: true  !default;
+$breakpoint-to-ems:             false;
+
+$breakpoints: add-breakpoint('map short', min-height 420px);
+$breakpoints: add-breakpoint('map medium', min-height 480px);
+$breakpoints: add-breakpoint('map tall', min-height 580px);
+$breakpoints: add-breakpoint('map xtall', min-height 720px);
+
+$breakpoints: add-breakpoint('footer three col', 680px);
