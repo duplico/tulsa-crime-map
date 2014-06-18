@@ -5,3 +5,6 @@ crimemap.fs.*
 
 # Don't track API keys
 api_key.py
+
+# Don't cache Sass compile cache
+.sass-cache
