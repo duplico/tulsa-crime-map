@@ -33,6 +33,9 @@ def normalize_timestamp(timestamp):
     return final_date
 
 def main():
+    import logging
+    logging.basicConfig()
+
     # Set up DB connection:
     storage = ZODB.config.databaseFromURL('zeoclient.config')
     connection = storage.open()
@@ -50,13 +53,14 @@ def main():
     time_format = "%m/%d/%Y %I:%M:%S %p"
     for call in fire_calls:
         k = (call['Address'], call['Problem'])
+        timing = datetime.strptime(normalize_timestamp(call['ResponseDate']), time_format)
+        if timing + timedelta(hours=1) < datetime.now():
+            print "Aging off", k
+            continue
         keys.add(k)
         if k in fire_db:
             print "Already exists."
             continue
-        timing = datetime.strptime(normalize_timestamp(call['ResponseDate']), time_format)
-        if timing + timedelta(hours=1) < datetime.now():
-            continue # We only care about calls from the last hour, I think.
         v = dict(
             location=call['Address'], 
             description=call['Problem'], 
