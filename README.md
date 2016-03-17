@@ -6,7 +6,7 @@ This web app and Scrapy pipeline/script scrapes the [Tulsa Police Department Rec
 
 There are some non-Python dependencies. Specifically, in Ubuntu this will take care of those:
 
-    $ apt-get install build-essential openssl python-dev libffi-dev libxml2 libxslt1-dev
+    $ apt-get install build-essential openssl python-dev libffi-dev libxml2 libxslt1-dev libssl-dev
 
 Python dependencies are located in the requirement.txt file. To install them, use pip:
 
